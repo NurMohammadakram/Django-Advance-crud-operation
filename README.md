@@ -48,19 +48,39 @@ project-root/
 
 4. **Configure settings.py**
     ```python
+    INSTALLED_APPS = [
+        #your newly created apps name
+        'student_info'
+    ]
+    
+    ```
+
+    ```python
+    TEMPLATES = [
+        {
+            'DIRS': [BASE_DIR / 'templates'],
+        }
+    ]
+    
+    ```
+
+    ```python
     MEDIA_URL = '/media/'
-    MEDIA_ROOT = 'media/'
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = ['static']
+    MEDIA_ROOT = BASE_DIR / 'media'
+    STATIC_URL = 'static/'
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
     ```
 
 5. **Configure urls.py**
     ```python
     from django.conf import settings
     from django.conf.urls.static import static
-    
+    from django.urls import path, include
     urlpatterns = [
-        # Your URLs here
+        # Your URLs here like this
+        path('', include('student_info.urls'))
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     ```
 
